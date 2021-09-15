@@ -4,7 +4,7 @@ import { environmentVariables } from "#root/utils/env";
 import { User } from "#root/entity/User";
 import { I_RefreshToken } from "#root/modules/interfaces/Tokens";
 
-const SECRET = environmentVariables.REFRESH_TOKEN_SECRET;
+const REFRESH_SECRET = environmentVariables.REFRESH_TOKEN_SECRET;
 
 function signRefreshToken(user: User, mins: number) {
 	const serviceParams: I_RefreshToken = {
@@ -14,7 +14,7 @@ function signRefreshToken(user: User, mins: number) {
 			count: user.refreshTokenCountTrack,
 		},
 	};
-	return sign({ ...serviceParams }, SECRET, { expiresIn: `${mins}m` });
+	return sign({ ...serviceParams }, REFRESH_SECRET, { expiresIn: `${mins}m` });
 }
 
 export function generateRefreshToken(user: User, mins: number) {
