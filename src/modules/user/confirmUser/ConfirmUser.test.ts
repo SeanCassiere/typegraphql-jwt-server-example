@@ -40,7 +40,7 @@ describe("Confirm User", () => {
 			variableValues: { token },
 		});
 
-		console.log("confirm a unconfirmed user:", response);
+		// console.log("confirm a unconfirmed user:", response);
 
 		expect(response).toMatchObject({
 			data: {
@@ -56,7 +56,7 @@ describe("Confirm User", () => {
 			variableValues: { token },
 		});
 
-		console.log("confirm a confirmed user:", response);
+		// console.log("confirm a confirmed user:", response);
 
 		expect(response).toMatchObject({
 			data: {

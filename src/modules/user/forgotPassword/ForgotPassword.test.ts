@@ -38,7 +38,7 @@ describe("ForgotPassword", () => {
 			},
 		});
 
-		console.log("forgotPassword confirmed user:", response);
+		// console.log("forgotPassword confirmed user:", response);
 
 		expect(response).toMatchObject({
 			data: {
@@ -62,7 +62,7 @@ describe("ForgotPassword", () => {
 			},
 		});
 
-		console.log("forgotPassword unconfirmed user:", response);
+		// console.log("forgotPassword unconfirmed user:", response);
 
 		expect(response).toMatchObject({
 			data: {

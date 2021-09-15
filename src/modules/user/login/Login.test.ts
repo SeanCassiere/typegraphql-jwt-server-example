@@ -16,13 +16,11 @@ afterAll(async () => {
 	await conn.close();
 });
 
-const meQuery = `
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      id
-      firstName
-      lastName
-      email
+const loginQuery = `
+  mutation LoginQuery($data: LoginInput!) {
+    login(data: $data) {
+      jwt_token
+			jwt_expires_at
     }
   }
 `;
@@ -39,22 +37,22 @@ describe("Login", () => {
 		}).save();
 
 		const response = await gCall({
-			source: meQuery,
+			source: loginQuery,
 			variableValues: {
-				email: user.email,
-				password: userPass,
+				data: {
+					email: user.email,
+					password: userPass,
+				},
 			},
 		});
 
-		console.log("login confirmed user:", response);
+		// console.log("login confirmed user:", response);
 
 		expect(response).toMatchObject({
 			data: {
 				login: {
-					id: `${user.id}`,
-					firstName: user.firstName,
-					lastName: user.lastName,
-					email: user.email,
+					jwt_token: expect.anything(),
+					jwt_expires_at: expect.anything(),
 				},
 			},
 		});
@@ -70,14 +68,14 @@ describe("Login", () => {
 		}).save();
 
 		const response = await gCall({
-			source: meQuery,
+			source: loginQuery,
 			variableValues: {
-				email: user.email,
-				password: userPass,
+				data: {
+					email: user.email,
+					password: userPass,
+				},
 			},
 		});
-
-		console.log(response);
 
 		expect(response).toMatchObject({
 			data: {

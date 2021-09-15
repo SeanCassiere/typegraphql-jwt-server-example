@@ -43,7 +43,7 @@ describe("Register", () => {
 			},
 		});
 
-		console.log("register create user:", response);
+		// console.log("register create user:", response);
 
 		expect(response).toMatchObject({
 			data: {

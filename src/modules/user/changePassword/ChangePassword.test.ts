@@ -6,6 +6,7 @@ import { testConn } from "../../../test-utils/testConn";
 import { gCall } from "../../../test-utils/gCall";
 import { redis } from "../../../redis";
 import { User } from "../../../entity/User";
+import { generateAccessToken } from "#root/modules/utils/jwt/generateAccessToken";
 
 let conn: Connection;
 beforeAll(async () => {
@@ -40,6 +41,10 @@ describe("Change Password", () => {
 		const response = await gCall({
 			source: changePasswordQuery,
 			userId: user.id,
+			user: user,
+			headers: {
+				authorization: `Bearer ${generateAccessToken(user, 2).jwt_token}`,
+			},
 			variableValues: {
 				data: {
 					oldPassword: userPass,
@@ -48,7 +53,7 @@ describe("Change Password", () => {
 			},
 		});
 
-		console.log("password changed successfully:", response);
+		// console.log("password changed successfully:", response);
 
 		expect(response).toMatchObject({
 			data: {
@@ -74,7 +79,7 @@ describe("Change Password", () => {
 			},
 		});
 
-		console.log("password change failed since not logged in and does not exist:", response);
+		// console.log("password change failed since not logged in and does not exist:", response);
 
 		expect(response).toMatchObject({
 			data: {

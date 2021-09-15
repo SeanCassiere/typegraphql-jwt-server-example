@@ -39,7 +39,7 @@ describe("ResendConfirmation", () => {
 			},
 		});
 
-		console.log("resend for unconfirmed user:", response);
+		// console.log("resend for unconfirmed user:", response);
 
 		expect(response).toMatchObject({
 			data: {
@@ -66,7 +66,7 @@ describe("ResendConfirmation", () => {
 			},
 		});
 
-		console.log("resend for confirmed user:", response);
+		// console.log("resend for confirmed user:", response);
 
 		expect(response).toMatchObject({
 			data: {
@@ -85,7 +85,7 @@ describe("ResendConfirmation", () => {
 			},
 		});
 
-		console.log("resend for non-existent user:", response);
+		// console.log("resend for non-existent user:", response);
 
 		expect(response).toMatchObject({
 			data: {

@@ -5,6 +5,7 @@ import { testConn } from "../../../test-utils/testConn";
 import { gCall } from "../../../test-utils/gCall";
 import { redis } from "../../../redis";
 import { User } from "../../../entity/User";
+import { generateAccessToken } from "#root/modules/utils/jwt/generateAccessToken";
 
 let conn: Connection;
 beforeAll(async () => {
@@ -38,10 +39,12 @@ describe("Me", () => {
 
 		const response = await gCall({
 			source: meQuery,
+			user,
 			userId: user.id,
+			headers: { authorization: `Bearer ${generateAccessToken(user, 2).jwt_token}` },
 		});
 
-		console.log("meQuery true", response);
+		// console.log("meQuery true", response);
 
 		expect(response).toMatchObject({
 			data: {
@@ -60,7 +63,7 @@ describe("Me", () => {
 			source: meQuery,
 		});
 
-		console.log("meQuery null", response);
+		// console.log("meQuery null", response);
 
 		expect(response).toMatchObject({
 			data: {

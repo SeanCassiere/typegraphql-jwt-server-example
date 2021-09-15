@@ -52,7 +52,7 @@ describe("ChangePasswordFromForgot", () => {
 			},
 		});
 
-		console.log("change password if valid token", response);
+		// console.log("change password if valid token", response);
 
 		expect(response).toMatchObject({
 			data: {
@@ -79,7 +79,7 @@ describe("ChangePasswordFromForgot", () => {
 			},
 		});
 
-		console.log("fail forgot password change", response);
+		// console.log("fail forgot password change", response);
 
 		expect(response).toMatchObject({
 			data: {
