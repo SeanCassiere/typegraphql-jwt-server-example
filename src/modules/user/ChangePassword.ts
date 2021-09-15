@@ -12,9 +12,9 @@ export class ChangePasswordResolver {
 		@Arg("data") { oldPassword, password }: ChangePasswordInput,
 		@Ctx() ctx: MyContext
 	): Promise<User | null> {
-		if (!ctx.req.session.userId) return null;
+		if (!ctx.req.userId) return null;
 
-		const user = await User.findOne(ctx.req.session.userId);
+		const user = await User.findOne(ctx.req.userId);
 
 		if (!user) return null;
 

@@ -1,10 +1,9 @@
+import { User } from "#root/entity/User";
 import { Request, Response } from "express";
-import { Session } from "express-session";
-
-export type SessionWithUser = Session & { userId: number };
 
 export type AuthRequest = Request & {
-	session?: SessionWithUser;
+	user?: User;
+	userId?: number;
 };
 export interface MyContext {
 	req: AuthRequest;

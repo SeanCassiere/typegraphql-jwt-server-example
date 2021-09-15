@@ -6,13 +6,8 @@ import { MyContext } from "#root/types/MyContext";
 export class LogoutResolver {
 	@Mutation(() => Boolean)
 	async logout(@Ctx() ctx: MyContext): Promise<boolean> {
-		return new Promise<boolean>((res, rej) => {
-			ctx.req.session!.destroy((err) => {
-				if (err) {
-					console.log(err);
-					return rej(false);
-				}
-			});
+		return new Promise<boolean>((res) => {
+			ctx.req.userId = undefined;
 
 			ctx.res.clearCookie("qid");
 			return res(true);

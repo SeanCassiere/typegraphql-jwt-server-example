@@ -7,10 +7,10 @@ import { MyContext } from "#root/types/MyContext";
 export class MeResolver {
 	@Query(() => User, { nullable: true })
 	async me(@Ctx() ctx: MyContext): Promise<User | undefined> {
-		if (!ctx.req.session.userId) {
+		if (!ctx.req.userId) {
 			return undefined;
 		}
 
-		return await User.findOne(ctx.req.session.userId);
+		return await User.findOne(ctx.req.userId);
 	}
 }

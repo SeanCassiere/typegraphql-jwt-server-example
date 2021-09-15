@@ -27,7 +27,7 @@ export class ChangePasswordFromForgotResolver {
 		user.password = hashedPassword;
 		await user.save();
 
-		ctx.req.session.userId = user.id;
+		ctx.req.userId = user.id;
 
 		return user;
 	}

@@ -8,7 +8,7 @@ export const testConn = async (drop: boolean = false) => {
 		port: 5432,
 		username: "postgres",
 		password: "",
-		database: "typegraphql-server-example-test",
+		database: "typegraphql-jwt-server-example-test",
 		synchronize: drop,
 		logging: false,
 		dropSchema: drop,

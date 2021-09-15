@@ -12,7 +12,7 @@
 		"port": 5432,
 		"username": "postgres",
 		"password": "",
-		"database": "typegraphql-server-example",
+		"database": "typegraphql-jwt-server-example",
 		"synchronize": true,
 		"logging": true,
 		"entities": ["src/entity/*.*"]

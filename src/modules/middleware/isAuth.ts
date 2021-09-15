@@ -3,7 +3,7 @@ import { MiddlewareFn } from "type-graphql";
 import { MyContext } from "#root/types/MyContext";
 
 export const isAuth: MiddlewareFn<MyContext> = async ({ context }, next) => {
-	if (!context.req.session.userId) {
+	if (!context.req.userId) {
 		throw new Error("You are not authorized");
 	}
 

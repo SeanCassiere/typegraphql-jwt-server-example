@@ -3,15 +3,14 @@ import bcrypt from "bcryptjs";
 
 import { User } from "#root/entity/User";
 import { MyContext } from "#root/types/MyContext";
+import { LoginInput } from "./login/LoginInput";
+import { AccessToken } from "#root/modules/shared/AccessTokenReturn";
+import { generateAccessToken } from "#root/modules/utils/jwt/generateAccessToken";
 
 @Resolver()
 export class LoginResolver {
-	@Mutation(() => User, { nullable: true })
-	async login(
-		@Arg("email") email: string,
-		@Arg("password") password: string,
-		@Ctx() ctx: MyContext
-	): Promise<User | null> {
+	@Mutation(() => AccessToken, { nullable: true })
+	async login(@Arg("data") { email, password }: LoginInput, @Ctx() ctx: MyContext): Promise<AccessToken | null> {
 		const user = await User.findOne({ where: { email } });
 
 		if (!user) return null;
@@ -24,8 +23,8 @@ export class LoginResolver {
 
 		if (!user.isEmailConfirmed) return null;
 
-		ctx.req.session.userId = user.id;
+		ctx.req.userId = user.id;
 
-		return user;
+		return generateAccessToken(user, 30);
 	}
 }
