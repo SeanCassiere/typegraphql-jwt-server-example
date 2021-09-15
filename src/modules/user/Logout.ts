@@ -9,7 +9,7 @@ export class LogoutResolver {
 		return new Promise<boolean>((res) => {
 			ctx.req.userId = undefined;
 
-			ctx.res.clearCookie("qid");
+			ctx.res.clearCookie("refresh-token");
 			return res(true);
 		});
 	}

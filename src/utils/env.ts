@@ -2,7 +2,15 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const variablesToCheck = ["NODE_ENV", "PORT", "DATABASE_URL", "ACCESS_TOKEN_SECRET", "SERVER_HOST"] as const;
+const variablesToCheck = [
+	"NODE_ENV",
+	"PORT",
+	"DATABASE_URL",
+	"ACCESS_TOKEN_SECRET",
+	"REFRESH_TOKEN_SECRET",
+	"COOKIE_SECRET",
+	"SERVER_HOST",
+] as const;
 
 type EnvTypes = typeof variablesToCheck[number];
 type ReturnType = { [key in EnvTypes]?: any };

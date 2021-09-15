@@ -6,6 +6,9 @@ import { MyContext } from "#root/types/MyContext";
 import { LoginInput } from "./login/LoginInput";
 import { AccessToken } from "#root/modules/shared/AccessTokenReturn";
 import { generateAccessToken } from "#root/modules/utils/jwt/generateAccessToken";
+import { generateRefreshToken } from "../utils/jwt/generateRefreshToken";
+import { environmentVariables } from "#root/utils/env";
+import { addMinsToCurrentDate } from "../utils/addMinsToCurrentDate";
 
 @Resolver()
 export class LoginResolver {
@@ -24,6 +27,13 @@ export class LoginResolver {
 		if (!user.isEmailConfirmed) return null;
 
 		ctx.req.userId = user.id;
+
+		ctx.res.cookie("refresh-token", generateRefreshToken(user, 60 * 20), {
+			secure: environmentVariables.NODE_ENV === "production" ? true : false,
+			expires: addMinsToCurrentDate(60 * 20),
+			signed: true,
+			httpOnly: true,
+		});
 
 		return generateAccessToken(user, 30);
 	}

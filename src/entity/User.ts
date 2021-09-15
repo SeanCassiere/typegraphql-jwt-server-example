@@ -33,4 +33,7 @@ export class User extends BaseEntity {
 
 	@Column("bool", { default: false })
 	isEmailConfirmed: boolean;
+
+	@Column("int", { default: 0, name: "refresh_token_count" })
+	refreshTokenCountTrack: number;
 }

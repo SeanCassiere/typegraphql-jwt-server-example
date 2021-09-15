@@ -2,17 +2,15 @@ import { sign, decode, JwtPayload } from "jsonwebtoken";
 
 import { environmentVariables } from "#root/utils/env";
 import { User } from "#root/entity/User";
+import { I_AccessToken } from "#root/modules/interfaces/Tokens";
 
-const SERVER_HOST = environmentVariables.SERVER_HOST;
 const SECRET = environmentVariables.ACCESS_TOKEN_SECRET;
 
 function signAccessToken(user: User, mins: number) {
-	const serviceParams = {
-		[SERVER_HOST]: {
-			user: {
-				id: user.id,
-				email: user.email,
-			},
+	const serviceParams: I_AccessToken = {
+		user: {
+			id: user.id,
+			email: user.email,
 		},
 	};
 	return sign({ ...serviceParams }, SECRET, { expiresIn: `${mins}m` });

@@ -8,6 +8,7 @@ import { createSchema } from "./utils/createSchema";
 import { createTypeormConn } from "./utils/createTypeormConn";
 
 import { environmentVariables } from "./utils/env";
+import cookieParser from "cookie-parser";
 
 const PORT = environmentVariables.PORT;
 
@@ -32,6 +33,8 @@ export const startServer = async () => {
 			credentials: true,
 		})
 	);
+
+	app.use(cookieParser(environmentVariables.COOKIE_SECRET));
 
 	await apolloServer.start();
 
